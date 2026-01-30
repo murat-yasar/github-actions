@@ -15,7 +15,3 @@ jobs:
            run: echo "This step runs successfully"
          - name: Say goodbye
            run: echo "Goodbye world!"
-         # - name: Failed step
-         #   run: |
-         #     echo "This step has failed"
-         #     exit 1
