@@ -7,4 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: echo ubuntu
-        run: echo "This job runs on ubuntu-latest"
+        run: |
+          echo "This job runs on on an Ubuntu runner"
+          echo "Runner-OS: $RUNNER_OS"
