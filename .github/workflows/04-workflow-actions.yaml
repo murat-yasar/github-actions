@@ -1,0 +1,15 @@
+name: 04 - Using Actions
+
+on: push
+
+# 1. Checkout Code
+# 2. Install dependencies
+# 3. Execute automated tests
+jobs:
+   build:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout Code
+           uses: actions/checkout@v4
+         - name: Print Folders/Files
+           run: ls
