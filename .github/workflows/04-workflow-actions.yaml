@@ -1,16 +1,17 @@
 name: 04 - Using Actions
 
-on: push
+on: workflow_dispatch
 
 # 1. Checkout Code
-# 2. Install dependencies
-# 3. Execute automated tests
+# 2. Install Node
+# 3. Install dependencies
+# 4. Execute automated tests
 jobs:
    build:
       runs-on: ubuntu-latest
       defaults:
           run:
-           working-directory: test-04-actions/react-app
+           working-directory: apps/react-app
 
       steps:
          - name: Checkout Code
