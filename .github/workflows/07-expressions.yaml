@@ -16,12 +16,12 @@ jobs:
          - name: "[debug] Print start-up data"
            if: inputs.debug
            run: |
-              echo "Triggered by ${{ github.event_name }}"
-              echo "Branch: ${{ github.ref }}"
-              echo "Commit SHA: ${{ github.sha }}"
-              echo "Runner OS: ${{ runner.os }}"
-         - name: "[debug] Print when triggered from dev"
-           if: ${{ !inputs.debug && github.ref == 'refs/heads/dev' }}
-           run: echo "This is triggered from dev"
+             echo "Triggered by ${{ github.event_name }}"
+             echo "Branch: ${{ github.ref }}"
+             echo "Commit SHA: ${{ github.sha }}"
+             echo "Runner OS: ${{ runner.os }}"
+         - name: "[debug] Print when triggered from main"
+           if: ${{ inputs.debug && github.ref == 'refs/heads/main' }}
+           run: echo "This is triggered from main"
          - name: greetings
            run: echo "Hello, World!"
