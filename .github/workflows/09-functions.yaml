@@ -8,11 +8,19 @@ jobs:
   echo1:
     runs-on: ubuntu-latest
     steps:
+      - name: Print PR title
+        run: |
+          echo "PR title: ${{ github.event.pull_request.name }}"
+      - name: Sleep 10 second
+        run: sleep 10
       - name: Run (exit-1)
         run: exit 1
       - name: Test (success)
         if: ${{ success() }}
         run: echo "Previous step is successfull!"
+      - name: Test (success)
+        if: ${{ !success() }}
+        run: echo "Previous step is NOT successfull!"
       - name: Test (fail)
         if: ${{ failure() }}
         run: echo "At least one of the previous steps has been failed!"
