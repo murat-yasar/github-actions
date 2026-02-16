@@ -37,10 +37,10 @@ jobs:
          - name: Print Repository Variables
            run: |
              echo "Rep var: ${{ vars.HELLO_VAR }}"
-             
+
    echo-3:
       runs-on: ubuntu-latest
       steps:
          - name: Print Organization Variables
            run: |
-             echo "Rep var: ${{ vars.MY_ORG_VAR }}"
+             echo "Org var: ${{ vars.MY_ORG_VAR }}"
