@@ -11,6 +11,14 @@ jobs:
       - name: Print PR title
         run: |
           echo "PR title: ${{ github.event.pull_request.name }}"
+      - name: Print PR labels
+        run: |
+          cat << EOF
+          ${{ github.event.pull_request.labels }}
+          EOF
+      - name: Bug-fix
+        if: ${{ !cancelled() && contains(github.event.pull_request.title, 'fix') }}
+        run: "This is a bug-fix"
       - name: Sleep 10 second
         run: sleep 10
       - name: Run (exit-1)
