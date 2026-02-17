@@ -11,6 +11,8 @@ on:
 jobs:
   lint-build:
     runs-on: ubuntu-latest
+    # Lets skipping this job and move on to the following jobs, in case of error
+    # continue-on-error: true
     steps:
       - name: Lint and Build
         run: |
@@ -22,7 +24,6 @@ jobs:
 
   unit-tests:
     runs-on: ubuntu-latest
-    continue-on-error: true   # Lets skipping this job and move on to the following jobs, in case of error
     steps:
       - name: Running unit tests
         run: echo "Running unit tests..."
