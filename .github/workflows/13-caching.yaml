@@ -1,0 +1,33 @@
+name: 13 - Caching
+
+on:
+  workflow_dispatch:
+    inputs:
+      use-cache:
+        description: Whether to execute the cache step
+        type: boolean
+        default: true
+
+# 1. Checkout the code
+# 2. Install dependencies
+# 3. Lint, Format, Test, Build
+# 4. Deploy to the nonprod environment
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Test
+        run: npm run test
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying to nonprod..."
