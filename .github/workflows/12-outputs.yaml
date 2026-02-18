@@ -1,8 +1,13 @@
 name: 12 - Outputs
 
+# Step.1: Define a step ID where we take the output from
+# Step.2: Assign key-value pair and output the variable in an env variable
+# Step.3: Reference the output in the outputs section of the job
+# Step.4: List the outputing job as dependency where the output will be consumed
+# Step.5: Access the output
+
 on:
   workflow_dispatch:
-    # Define build-status input
     inputs:
       build-status:
         type: choice
@@ -14,20 +19,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Define build-status output
+    # Step.3: Reference the output
     outputs:
-      build-status: ${{ steps.build.outputs.status }}
+      build-status: ${{ steps.build.outputs.status }} # Get the variable of the 'status' key from the 'outputs' of 'build' step
     steps:
       - name: Print output path
         run: |
           echo "Output path: $GITHUB_OUTPUT"
       - name: Build
+        # Step.1: Define ID
         id: build
-        run: echo "status=${{ inputs.build-status }}" >> "$GITHUB_OUTPUT"
+        # Step.2: Assign and output the variable
+        run: echo "status=${{ inputs.build-status }}" >> "$GITHUB_OUTPUT" # Set the variable of 'status' key in 'build' step
   deploy:
     runs-on: ubuntu-latest
+    # Step.4: Set the dependency for getting the output
     needs: build
+    # Step.5: Access the output
     if: ${{ needs.build.outputs.build-status == 'success' }}
+    # Get the 'build-status' variable of the 'output' of the 'build' need
     steps:
       - name: Deploy
         id: deploy
