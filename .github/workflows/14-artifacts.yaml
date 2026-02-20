@@ -37,6 +37,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: test-build
     steps:
       - name: Download build files
         uses: actions/download-artifact@v4
