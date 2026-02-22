@@ -5,7 +5,7 @@ on:
 
 jobs:
   include-example:
-    name: ${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}}
+    name: ${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}} - ${{matrix.opacity}}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -16,6 +16,8 @@ jobs:
           # If the color is 'red', then add shape 'triangle'
           - color: red
             shape: triangle
+          # If there is no matching value, adds a new property
+          - opacity: 50
     steps:
       - name: Print Options
-        run: echo "${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}}"
+        run: echo "${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}} - ${{matrix.opacity}}"
