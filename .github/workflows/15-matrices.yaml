@@ -5,19 +5,32 @@ on:
 
 jobs:
   backwards-compatibility:
-    name: ${{matrix.os}}-${{matrix.node-version}}
+    name: ${{matrix.os}} - ${{matrix.node-version}}
     runs-on: ${{matrix.os}}
     strategy:
+      # fail-fast: set true to let all the jobs to be canceled if one of the jobs fails; set false to keep other jobs to run
+      fail-fast: false
       matrix:
         node-version: [19.x, 20.x, 21.x]
         os:
           - ubuntu-latest
           # - macos-latest
           - windows-latest
+        include:
+        # include: to add a specific configuration
+          - os: ubuntu-latest
+            node-version: 16.x
+          - os: ubuntu-latest
+            node-version: 21.x
+            tag: experimental
+
     steps:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node-version}}
+      - name: Fail if experimental
+        if: matrix.tag == 'experimental'
+        run: exit 1
       - name: Testing
         run: echo "Running tests on ${{matrix.os}} with NodeJS ${{matrix.node-version}}"
