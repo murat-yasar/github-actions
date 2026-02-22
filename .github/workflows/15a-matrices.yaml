@@ -18,6 +18,10 @@ jobs:
             shape: triangle
           # If there is no matching value, adds a new property
           - opacity: 50
+          - color: red
+            opacity: 75
+          - shape: triangle
+            opacity: 100
     steps:
       - name: Print Options
         run: echo "${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}} - ${{matrix.opacity}}"
