@@ -1,0 +1,21 @@
+name: 15 - matrices
+
+on:
+  workflow_dispatch:
+
+jobs:
+  include-example:
+    name: ${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        color: [red, green]
+        shape: [circle, square]
+        size: [small, large]
+        include:
+          # If the color is 'red', then add shape 'triangle'
+          - color: red
+            shape: triangle
+    steps:
+      - name: Dummy Step
+        run: echo "Running dummy step..."
