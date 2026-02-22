@@ -22,6 +22,13 @@ jobs:
             opacity: 75
           - shape: triangle
             opacity: 100
+          - color: green
+            shape: circle
+            size: medium
+        # 'exclude' processes run before the 'include' processe
+        exclude:
+          - color: green
+            shape: circle
     steps:
       - name: Print Options
         run: echo "${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}} - ${{matrix.opacity}}"
