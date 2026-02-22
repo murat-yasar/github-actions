@@ -17,5 +17,5 @@ jobs:
           - color: red
             shape: triangle
     steps:
-      - name: Dummy Step
-        run: echo "Running dummy step..."
+      - name: Print Options
+        run: echo "${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}}"
