@@ -1,4 +1,4 @@
-name: 15 - matrices
+name: 15 - matrices (include & Exclude)
 
 on:
   workflow_dispatch:
