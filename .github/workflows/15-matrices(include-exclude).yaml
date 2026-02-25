@@ -1,0 +1,34 @@
+name: 15 - matrices (include & Exclude)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  include-example:
+    name: ${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}} - ${{matrix.opacity}}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        color: [red, green]
+        shape: [circle, square]
+        size: [small, large]
+        include:
+          # If the color is 'red', then add shape 'triangle'
+          - color: red
+            shape: triangle
+          # If there is no matching value, adds a new property
+          - opacity: 50
+          - color: red
+            opacity: 75
+          - shape: triangle
+            opacity: 100
+          - color: green
+            shape: circle
+            size: medium
+        # 'exclude' processes run before the 'include' processe
+        exclude:
+          - color: green
+            shape: circle
+    steps:
+      - name: Print Options
+        run: echo "${{matrix.color}} - ${{matrix.shape}} - ${{matrix.size}} - ${{matrix.opacity}}"
