@@ -1,6 +1,14 @@
 name: Cache Node and NPM Dependencies
 description: This action allows to cache both Node and NPM dependencies based on the package-lock.json file.
 
+# Create an Action
+# 1. Define inputs (if there is any)
+# 2. Create 'runs'
+#     1. Set the action (composite/javascript/docker)
+#     2. Setup actions
+#     3. Setup cache
+#     4. Install deps
+
 inputs:
   node_version:
     description: NodeJS version to use

@@ -1,0 +1,29 @@
+name: 17 - Custom Actions (Composite)
+
+on:
+  workflow_dispatch
+
+env:
+  working_directory: apps/react-app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      # Set working-directory for all run commands
+      run:
+        working-directory: ${{env.working_directory}}
+    steps:
+      # actions/checkout@v4: to check out the repository
+      - uses: actions/checkout@v4
+      - name: Setup Node and NPM Dependencies
+        # use the action directory
+        uses: ./.github/actions/composite-cache-deps
+        with:
+          node-version: 20.x
+          # this working directory doesn't run under run command! So we have to define the working-directory
+          working-directory: ${{env.working_directory}} #
+      - name: Test
+        run: npm run test
+      - name: Build
+        run: npm run build
