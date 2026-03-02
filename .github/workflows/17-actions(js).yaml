@@ -9,10 +9,15 @@ on:
         default: main
       target-branch:
         type: string
-        default: update-dependencies
+        default: update-deps
       working-dir:
         type: string
         default: apps/react-app
+
+# Ensure gh-tokens contains the "write" permissions
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   dependency-update:
@@ -27,3 +32,4 @@ jobs:
           base-branch: ${{inputs.base-branch}}
           target-branch: ${{inputs.target-branch}}
           working-directory: ${{inputs.working-dir}}
+          gh-token: ${{secrets.GITHUB_TOKEN}}
