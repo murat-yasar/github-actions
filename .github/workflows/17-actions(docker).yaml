@@ -1,0 +1,39 @@
+name: 17 - Custom Actions (JS)
+run-name: 17 - Custom Actions (JS) | BB-${{inputs.base-branch}} TB-${{inputs.head-branch}} WD-${{inputs.working-dir}}
+
+on:
+  workflow_dispatch:
+    inputs:
+      base-branch:
+        type: string
+        default: main
+      head-branch:
+        type: string
+        default: update-deps
+      working-dir:
+        type: string
+        default: apps/react-app
+      debug:
+        type: boolean
+        default: false
+
+# Ensure gh-tokens contains the "write" permissions
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependency-update:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout@v4: to check out the repository
+      - uses: actions/checkout@v4
+      - name: Check for dependency updates
+        # use the action directory
+        uses: ./.github/actions/js-deps-update
+        with:
+          base-branch: ${{inputs.base-branch}}
+          head-branch: ${{inputs.head-branch}}
+          working-directory: ${{inputs.working-dir}}
+          gh-token: ${{secrets.GITHUB_TOKEN}}
+          debug: ${{inputs.debug}}
