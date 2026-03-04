@@ -25,6 +25,7 @@ jobs:
       # actions/checkout@v4: to check out the repository
       - uses: actions/checkout@v4
       - name: Setup Node and NPM Dependencies
+        id: setup-deps
         # use the action directory
         uses: ./.github/actions/composite-cache-deps
         with:
@@ -32,6 +33,9 @@ jobs:
           # this working directory doesn't run under run command! So we have to define the working-directory
           working-directory: ${{env.working_directory}}
           target-env: ${{ inputs.target-env}}
+      - name: Print setup dependencies
+        run: |
+          echo "Installed dependencies: ${{ steps.setup-deps.outputs.installed-deps }}"
       - name: Test
         run: npm run test
       - name: Build
