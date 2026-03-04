@@ -89,8 +89,12 @@ async function run () {
     ...commonExecOpts
   });
 
+  let updatesAvailable = false;
+
   // 3. If the output of 'git status ...' command is zero, then there is no update
   if (gitStatus.stdout.length > 0) {
+    updatesAvailable = true;
+
     logger.debug(`There are updates available!`);
     logger.debug(`Setting up git...`);
 
@@ -136,6 +140,9 @@ async function run () {
     // 5. Conclude the custom action
     logger.info(`There is no updates at the moment!`);
   }
+
+  logger.debug(`Setting updates-available output to ${updatesAvailable}...`);
+  core.setOutput(`updates-available`, updatesAvailable);
 }
 
 run();

@@ -29,6 +29,7 @@ jobs:
       # actions/checkout@v4: to check out the repository
       - uses: actions/checkout@v4
       - name: Check for dependency updates
+        id: update-deps
         # use the action directory
         uses: ./.github/actions/js-deps-update
         with:
@@ -37,3 +38,6 @@ jobs:
           working-directory: ${{inputs.working-dir}}
           gh-token: ${{secrets.GITHUB_TOKEN}}
           debug: ${{inputs.debug}}
+      - name: Print custom actions output
+        run: |
+          echo "Updates available: ${{steps.update-deps.outputs.updates-available }}"

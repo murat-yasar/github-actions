@@ -20,6 +20,10 @@ inputs:
     description: Whether the output debug messages to the console
     default: 'false' # expected a string
 
+outputs:
+  updates-available:
+    description: Whether there are updates available
+
 runs:
   using: node20
   main: main.js
