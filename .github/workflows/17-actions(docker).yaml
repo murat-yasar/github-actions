@@ -28,6 +28,6 @@ jobs:
       - name: Ping URL
         uses: ./.github/actions/docker-ping-url
         with:
-          ping-url: ${{inputs.url}}
+          url: ${{inputs.url}}
           max_trials: ${{inputs.max_trials}}
           delay: ${{inputs.delay}}
