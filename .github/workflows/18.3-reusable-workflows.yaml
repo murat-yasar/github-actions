@@ -1,0 +1,14 @@
+name: 18.3 - Reusable Workflows | Reusable Usage
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-use:
+    uses: ./.github/workflows/18.1-reusable-workflows.yaml
+    with:
+      target-directory: dummy-dir
+
+  e2e-test:
+    # uses: <owner>/<repo>/.github/workflows/<workflow_name>@<version>
+    uses: murat-yasar/github-actions-e2e-tests/.github/workflows/e2e.yaml@main
