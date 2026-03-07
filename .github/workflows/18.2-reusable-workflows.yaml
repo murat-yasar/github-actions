@@ -1,4 +1,4 @@
-name: 18b - Reusable Workflows | Reusable Usage
+name: 18.2 - Reusable Workflows | Reusable Usage
 
 on:
   workflow_dispatch:
