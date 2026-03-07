@@ -1,10 +1,10 @@
-name: 18.3 - Reusable Workflows | Reusable Usage
+name: 18.3 - Reusable Workflows | usage from another repo
 
 on:
   workflow_dispatch:
 
 jobs:
-  deploy-use:
+  deploy:
     uses: ./.github/workflows/18.1-reusable-workflows.yaml
     with:
       target-directory: dummy-dir
