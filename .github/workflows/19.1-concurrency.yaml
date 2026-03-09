@@ -1,4 +1,4 @@
-name: 19 - Concurrency Management
+name: 19.1 - Concurrency Management (workflow level)
 
 on:
   workflow_dispatch:

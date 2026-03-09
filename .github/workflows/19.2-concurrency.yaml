@@ -1,0 +1,52 @@
+name: 19.2 - Concurrency Management (job level)
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        type: choice
+        options:
+          - 'https://www.google.com'
+          - 'https://www.some-invalid-url.com'
+          - 'some-invalid-url'
+        default: 'https://www.google.com'
+      max_trials:
+        description: Maximum trials until the action fails.
+        default: '10'
+        required: false
+      delay:
+        description: Delay in seconds between the trials.
+        default: '5'
+        required: false
+
+jobs:
+  ping-with-concurrency:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{github.workflow}} - ${{github.ref}}   # Restricht the concurreny-group with current workflow and the current branch
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ping URL
+        id: ping-url
+        uses: ./.github/actions/docker-ping-url
+        with:
+          url: ${{inputs.url}}
+          max_trials: ${{inputs.max_trials}}
+          delay: ${{inputs.delay}}
+      - name: Print output from ping url
+        run: |
+          echo "URL reachable: ${{ steps.ping-url.outputs.url-reachable }}"
+  ping-without-concurrency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ping URL
+        id: ping-url
+        uses: ./.github/actions/docker-ping-url
+        with:
+          url: ${{inputs.url}}
+          max_trials: ${{inputs.max_trials}}
+          delay: ${{inputs.delay}}
+      - name: Print output from ping url
+        run: |
+          echo "URL reachable: ${{ steps.ping-url.outputs.url-reachable }}"
